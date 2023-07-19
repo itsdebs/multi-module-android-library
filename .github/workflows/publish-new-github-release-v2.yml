@@ -20,12 +20,9 @@ jobs:
     runs-on: ubuntu-latest
     if: startsWith(github.ref, 'refs/heads/main') || ((startsWith(github.event.pull_request.head.ref, 'release/')  || startsWith(github.event.pull_request.head.ref, 'hotfix-release/')) && github.event.pull_request.merged == true) # only merged pull requests must trigger this job
     steps:
-      - name: Extract version from branch name (for release branches)
+      - name: Extract version from branch name
         id: extract-version
         run: |
-#          BRANCH_NAME="${{ github.event.pull_request.head.ref }}"
-#          VERSION=${BRANCH_NAME#hotfix-v2/}
-#          VERSION=${VERSION#release-v2/}
           VERSION=${module@version:=$VERSION}
           echo "release_version=$VERSION" >> $GITHUB_OUTPUT
 
@@ -39,14 +36,14 @@ jobs:
         with:
           node-version: 16
 
-#      - name: Create Github Release
-#        id: create_release
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#          CONVENTIONAL_GITHUB_RELEASER_TOKEN: ${{ secrets.PAT }}
-#        run: |
-#          module_name=$(echo ${{ steps.extract-version.outputs.release_version }} | cut -d'@' -f1)
-#          npx conventional-github-releaser -p angular -k $module_name
+      #      - name: Create Github Release
+      #        id: create_release
+      #        env:
+      #          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #          CONVENTIONAL_GITHUB_RELEASER_TOKEN: ${{ secrets.PAT }}
+      #        run: |
+      #          module_name=$(echo ${{ steps.extract-version.outputs.release_version }} | cut -d'@' -f1)
+      #          npx conventional-github-releaser -p angular -k $module_name
       - name: Get module name
         id: get-module
         run: |
