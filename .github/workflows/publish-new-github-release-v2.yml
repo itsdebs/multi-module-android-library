@@ -36,33 +36,41 @@ jobs:
         with:
           node-version: 16
 
-      #      - name: Create Github Release
-      #        id: create_release
-      #        env:
-      #          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #          CONVENTIONAL_GITHUB_RELEASER_TOKEN: ${{ secrets.PAT }}
-      #        run: |
-      #          module_name=$(echo ${{ steps.extract-version.outputs.release_version }} | cut -d'@' -f1)
-      #          npx conventional-github-releaser -p angular -k $module_name
       - name: Get module name
         id: get-module
         run: |
           module_name=$(echo ${{ steps.extract-version.outputs.release_version }} | cut -d'@' -f1)
           echo "::set-output name=module_name::$module_name"
 
-      - name: Create release with release-please
-        id: release-please
-        uses: google-github-actions/release-please-action@v3
-        with:
-          release-type: java
-          package-name: ${{ steps.get-module.outputs.module_name }}
-          monorepo-tags: ${{ steps.get-module.outputs.module_name }}
-          default-branch: develop
-          command: github-release
-          pull-request-header: ':crown: *An automated PR*'
-          skip-labeling: true
+      - name: Initialize mandatory git config
+        run: |
+          git config user.name "GitHub actions"
+          git config user.email noreply@github.com
 
-      - run: echo "A release was created. ${{ steps.release-please.outputs.releases_created }}"
+      - name: Create Monorepo Release Tag
+        id: create_monorepo_release
+        run: |
+          git tag -a v${{ steps.extract-version.outputs.release_version }} -m "chore: release v${{ steps.extract-version.outputs.release_version }}"
+          git push origin refs/tags/v${{ steps.extract-version.outputs.release_version }}
+
+      - name: Get the two latest versions
+        run: |
+          CURRENT_VERSION=$(git tag -l "v*" --sort=-version:refname | head -n 1)
+          LAST_VERSION=$(git tag -l "v*" --sort=-version:refname | head -n 2 | awk 'NR == 2 { print $1 }')
+
+          echo "Current version: $CURRENT_VERSION"
+          echo "Previous version: $LAST_VERSION"
+
+          echo "current_version=$(echo $CURRENT_VERSION)" >> $GITHUB_ENV
+          echo "last_version=$(echo $LAST_VERSION)" >> $GITHUB_ENV
+          echo "DATE=$(date)" >> $GITHUB_ENV
+
+      - name: Create GitHub Releases
+        id: create_release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          npm run release:github -- --base=$last_version --head=$current_version
 
       - name: Create pull request into develop
         uses: repo-sync/pull-request@v2
