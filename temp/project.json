@@ -1,0 +1,25 @@
+{
+  "name": "temp",
+  "$schema": "../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "./temp/src",
+  "targets": {
+    "build": {
+      "executor": "@jnxplus/nx-gradle:build",
+      "outputs": ["./temp/build"]
+    },
+    "lint": {
+      "executor": "@jnxplus/nx-gradle:lint",
+      "options": {
+        "linter": "ktlint"
+      }
+    },
+    "test": {
+      "executor": "@jnxplus/nx-gradle:test"
+    },
+    "ktformat": {
+      "executor": "@jnxplus/nx-gradle:ktformat"
+    }
+  },
+  "tags": []
+}

@@ -7,3 +7,19 @@ java {
     sourceCompatibility = JavaVersion.VERSION_1_7
     targetCompatibility = JavaVersion.VERSION_1_7
 }
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+compileKotlin {
+    kotlinOptions.jvmTarget = "17"
+    kotlinOptions.javaParameters = true
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "17"
+    kotlinOptions.javaParameters = true
+}
