@@ -1,7 +1,7 @@
 {
   "name": "@rudderstack/android",
   "title": "Rudder Integration Amplitude React Native",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Rudder React Native SDK Amplitude Device mode support for Android and iOS",
   "keywords": [
     "android",
