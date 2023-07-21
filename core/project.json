@@ -1,0 +1,46 @@
+{
+  "name": "core",
+  "$schema": "../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "./core/src",
+  "targets": {
+    "build": {
+      "executor": "@jnxplus/nx-gradle:build",
+      "outputs": ["./core/build"]
+    },
+    "lint": {
+      "executor": "@jnxplus/nx-gradle:lint",
+      "options": {
+        "linter": "ktlint"
+      }
+    },
+    "test": {
+      "executor": "@jnxplus/nx-gradle:test"
+    },
+    "ktformat": {
+      "executor": "@jnxplus/nx-gradle:ktformat"
+    },
+    "version": {
+      "executor": "@jscutlery/semver:version",
+      "options": {
+        "baseBranch": "main",
+        "preset": "conventional",
+        "tagPrefix": "${projectName}@"
+      }
+    },
+    "sync-bumped-version-properties": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "node gradle-updater.js 'core'"
+      }
+    },
+    "github": {
+      "executor": "@jscutlery/semver:github",
+      "options": {
+        "tag": "core@1.0.0",
+        "notesFile": "./core/CHANGELOG_LATEST.md"
+      }
+    }
+  },
+  "tags": []
+}

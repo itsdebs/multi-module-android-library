@@ -1,0 +1,26 @@
+pluginManagement {
+  repositories {
+    google()
+    mavenCentral()
+    gradlePluginPortal()
+  }
+  plugins {
+    id 'org.jetbrains.kotlin.jvm' version "${kotlinVersion}"
+    id 'org.jetbrains.kotlin.plugin.allopen' version "${kotlinVersion}"
+    id 'io.github.khalilou88.jnxplus' version "${jnxplusGradlePluginVersion}"
+  }
+}
+dependencyResolutionManagement {
+  repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+  repositories {
+    google()
+    mavenCentral()
+  }
+}
+rootProject.name = 'multi-module'
+include(':temp')
+
+include ':app'
+include ':core'
+include ':api'
+include ':android'
