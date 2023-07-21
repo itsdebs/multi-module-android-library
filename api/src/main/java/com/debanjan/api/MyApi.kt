@@ -1,7 +1,7 @@
 package com.debanjan.api
 
 class MyApi {
-    fun printApi(){
+    fun printApi() {
         println("This is my api")
     }
 }

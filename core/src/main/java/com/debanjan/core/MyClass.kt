@@ -4,7 +4,8 @@ class MyClass {
     fun print() {
         println("Hello World")
     }
-    fun newCoreMethod(){
+
+    fun newCoreMethod() {
         println("New Core Method")
     }
 }
