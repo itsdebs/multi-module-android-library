@@ -19,6 +19,27 @@
     },
     "ktformat": {
       "executor": "@jnxplus/nx-gradle:ktformat"
+    },
+    "version": {
+      "executor": "@jscutlery/semver:version",
+      "options": {
+        "baseBranch": "main",
+        "preset": "conventional",
+        "tagPrefix": "${projectName}@"
+      }
+    },
+    "sync-bumped-version-properties": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "node gradle-updater.js 'android'"
+      }
+    },
+    "github": {
+      "executor": "@jscutlery/semver:github",
+      "options": {
+        "tag": "android@1.0.0",
+        "notesFile": "./android/CHANGELOG_LATEST.md"
+      }
     }
   },
   "tags": []

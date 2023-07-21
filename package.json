@@ -1,6 +1,6 @@
 {
   "name": "@rudderstack/rudder-multi-module-monorepo",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Rudder Android SDK monorepo",
   "keywords": [
     "android",
@@ -18,10 +18,11 @@
   },
   "homepage": "https://github.com/rudderlabs/rudder-sdk-android#readme",
   "scripts": {
-    "setup:ci": "npm i && npm ci",
     "bump-version:monorepo": "npm version minor --git-tag-version false",
-    "release": "nx affected --base=origin/master --target=version --parallel=1 --skipCommitTypes=docs,ci,chore",
-    "release:github": "nx affected --target=github --parallel=1 --exclude=example --skipCommitTypes=docs,ci,chore"
+    "release": "nx affected --base=origin/main --target=version --parallel=1 --skipCommitTypes=docs,ci,chore && npm run sync-version-gradle",
+    "release:github": "nx affected --target=github --parallel=1 --exclude=app --skipCommitTypes=docs,ci,chore",
+    "sync-version-gradle": "nx affected --target=sync-bumped-version-properties --parallel=1 --exclude=app --skipCommitTypes=docs,ci,chore"
+
   },
   "private": true,
   "devDependencies": {
@@ -47,7 +48,10 @@
       "jiraOptional": true,
       "skipScope": false,
       "scopes": [
-        "android"
+        "android",
+        "core",
+        "api",
+        "temp"
       ],
       "maxHeaderWidth": 120,
       "defaultScope": "@rudderstack/rudder-multi-module-monorepo",
@@ -56,5 +60,8 @@
   },
   "nx": {
     "targets": {}
+  },
+  "dependencies": {
+    "properties-reader": "^2.2.0"
   }
 }

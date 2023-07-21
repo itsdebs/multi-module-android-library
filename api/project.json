@@ -19,6 +19,27 @@
     },
     "ktformat": {
       "executor": "@jnxplus/nx-gradle:ktformat"
+    },
+    "version": {
+      "executor": "@jscutlery/semver:version",
+      "options": {
+        "baseBranch": "main",
+        "preset": "conventional",
+        "tagPrefix": "${projectName}@"
+      }
+    },
+    "sync-bumped-version-properties": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "node gradle-updater.js 'api'"
+      }
+    },
+    "github": {
+      "executor": "@jscutlery/semver:github",
+      "options": {
+        "tag": "api@1.0.0",
+        "notesFile": "./api/CHANGELOG_LATEST.md"
+      }
     }
   },
   "tags": []
