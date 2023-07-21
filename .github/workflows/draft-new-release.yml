@@ -38,8 +38,8 @@ jobs:
           source_branch_name=${GITHUB_REF##*/}
           release_type=release
           grep -q "hotfix/" <<< "${GITHUB_REF}" && release_type=hotfix-release
-          git fetch origin master --depth=1
-          git merge origin/master
+          git fetch origin main --depth=1
+          git merge origin/main
           current_version=$(jq -r .version package.json)
 
           npm run bump-version:monorepo
@@ -64,11 +64,11 @@ jobs:
 
       - name: Update changelog & bump version
         id: finish-release
-        # We need master history that contains all previous tags commit reference
+        # We need main history that contains all previous tags commit reference
         run: |
           echo "Current version: $CURRENT_VERSION_VALUE"
           echo "New version: $NEW_VERSION_VALUE"
-          git fetch --no-tags --prune --depth=100 origin master
+          git fetch --no-tags --prune --depth=100 origin main
           npm run release
           ./scripts/sync-tags-in-nx-projects.sh
           ./scripts/generate-last-release-changelog.sh
@@ -80,7 +80,7 @@ jobs:
         run: |
           git push --follow-tags
 
-      - name: Create pull request into master
+      - name: Create pull request into main
         uses: repo-sync/pull-request@v2
         with:
           source_branch: ${{ steps.create-release.outputs.branch_name }}
