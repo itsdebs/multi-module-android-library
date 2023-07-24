@@ -37,7 +37,7 @@
     "github": {
       "executor": "@jscutlery/semver:github",
       "options": {
-        "tag": "android@1.0.0",
+        "tag": "android@0.1.0",
         "notesFile": "./android/CHANGELOG_LATEST.md"
       }
     }

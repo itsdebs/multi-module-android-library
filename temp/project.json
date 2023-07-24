@@ -37,7 +37,7 @@
     "github": {
       "executor": "@jscutlery/semver:github",
       "options": {
-        "tag": "temp@1.0.0",
+        "tag": "temp@0.1.0",
         "notesFile": "./temp/CHANGELOG_LATEST.md"
       }
     }
