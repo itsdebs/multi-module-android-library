@@ -40,7 +40,7 @@ jobs:
 
       - name: Install node_modules
         run: |
-          npm run setup:ci
+          npm ci
 
       - name: Publish release to sonatype
         run: |
