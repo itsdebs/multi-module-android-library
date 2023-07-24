@@ -43,11 +43,11 @@
     },
     "release": {
       "executor": "nx:run-commands",
-      "command": "cd android && sh ../gradlew publishToSonatype -Prelease closeAndReleaseSonatypeStagingRepository && cd .."
+      "command": "echo 'android-release' && cd android && sh ../gradlew publishToSonatype -Prelease closeAndReleaseSonatypeStagingRepository && cd .."
     },
     "snapshot-release": {
       "executor": "nx:run-commands",
-      "command": "echo 'android' && cd temp && sh ../gradlew publishToSonatype && cd .."
+      "command": "echo 'android-snap' && cd android && sh ../gradlew publishToSonatype && cd .."
     }
   },
   "tags": []
