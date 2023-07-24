@@ -40,6 +40,14 @@
         "tag": "temp@1.0.0",
         "notesFile": "./temp/CHANGELOG_LATEST.md"
       }
+    },
+    "release": {
+      "executor": "nx:run-commands",
+      "command": "cd temp && sh ../gradlew publishToSonatype -Prelease closeAndReleaseSonatypeStagingRepository && cd .."
+    },
+    "snapshot-release": {
+      "executor": "nx:run-commands",
+      "command": "echo 'temp' && cd temp && sh ../gradlew publishToSonatype && cd .."
     }
   },
   "tags": []

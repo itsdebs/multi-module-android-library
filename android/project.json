@@ -40,6 +40,14 @@
         "tag": "android@1.0.0",
         "notesFile": "./android/CHANGELOG_LATEST.md"
       }
+    },
+    "release": {
+      "executor": "nx:run-commands",
+      "command": "cd android && sh ../gradlew publishToSonatype -Prelease closeAndReleaseSonatypeStagingRepository && cd .."
+    },
+    "snapshot-release": {
+      "executor": "nx:run-commands",
+      "command": "echo 'android' && cd temp && sh ../gradlew publishToSonatype && cd .."
     }
   },
   "tags": []
