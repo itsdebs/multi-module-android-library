@@ -40,6 +40,14 @@
         "tag": "api@1.0.0",
         "notesFile": "./api/CHANGELOG_LATEST.md"
       }
+    },
+    "release": {
+      "executor": "nx:run-commands",
+      "command": "echo 'api-release' && cd api && sh ../gradlew publishToSonatype -Prelease closeAndReleaseSonatypeStagingRepository && cd .."
+    },
+    "snapshot-release": {
+      "executor": "nx:run-commands",
+      "command": "echo 'api-snap' && cd api && sh ../gradlew publishToSonatype && cd .."
     }
   },
   "tags": []

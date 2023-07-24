@@ -40,6 +40,14 @@
         "tag": "core@1.0.0",
         "notesFile": "./core/CHANGELOG_LATEST.md"
       }
+    },
+    "release": {
+      "executor": "nx:run-commands",
+      "command": "echo 'core-release' && cd core && sh ../gradlew publishToSonatype -Prelease closeAndReleaseSonatypeStagingRepository && cd .."
+    },
+    "snapshot-release": {
+      "executor": "nx:run-commands",
+      "command": "echo 'core-snap' && cd core && sh ../gradlew publishToSonatype && cd .."
     }
   },
   "tags": []
