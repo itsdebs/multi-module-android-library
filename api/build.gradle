@@ -1,6 +1,6 @@
 plugins {
     id 'java-library'
-    id 'org.jetbrains.kotlin.jvm'
+    id 'kotlin'
 }
 
 tasks.named('test') {
@@ -19,3 +19,5 @@ compileTestKotlin {
     kotlinOptions.jvmTarget = "17"
     kotlinOptions.javaParameters = true
 }
+apply from: rootProject.file('gradle/mvn-publish.gradle')
+apply from: rootProject.file('gradle/codecov.gradle')

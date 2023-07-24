@@ -5,9 +5,9 @@ pluginManagement {
     gradlePluginPortal()
   }
   plugins {
-    id 'org.jetbrains.kotlin.jvm' version "${kotlinVersion}"
-    id 'org.jetbrains.kotlin.plugin.allopen' version "${kotlinVersion}"
-    id 'io.github.khalilou88.jnxplus' version "${jnxplusGradlePluginVersion}"
+    id 'org.jetbrains.kotlin.jvm'
+    id 'org.jetbrains.kotlin.plugin.allopen'
+    id 'io.github.khalilou88.jnxplus' version "0.2.0"
   }
 }
 dependencyResolutionManagement {

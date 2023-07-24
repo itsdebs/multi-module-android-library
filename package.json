@@ -21,7 +21,9 @@
     "bump-version:monorepo": "npm version minor --git-tag-version false",
     "release": "nx affected --base=origin/main --target=version --parallel=1 --skipCommitTypes=docs,ci,chore && npm run sync-version-gradle",
     "release:github": "nx affected --target=github --parallel=1 --exclude=app --skipCommitTypes=docs,ci,chore",
-    "sync-version-gradle": "nx affected --target=sync-bumped-version-properties --parallel=1 --exclude=app --skipCommitTypes=docs,ci,chore"
+    "sync-version-gradle": "nx affected --target=sync-bumped-version-properties --parallel=1 --exclude=app --skipCommitTypes=docs,ci,chore",
+    "release:sonatype": "nx affected --target=release --parallel=1 --exclude=app --skipCommitTypes=docs,ci,chore",
+    "release-snapshot:sonatype": "nx affected --target=release-snapshot --parallel=1 --exclude=app --skipCommitTypes=docs,ci,chore"
   },
   "private": true,
   "devDependencies": {
