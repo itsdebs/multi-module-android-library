@@ -41,13 +41,17 @@
         "notesFile": "./core/CHANGELOG_LATEST.md"
       }
     },
-    "release": {
+    "release-sonatype": {
       "executor": "nx:run-commands",
-      "command": "echo 'core-release' && cd core && sh ../gradlew publishToSonatype -Prelease closeAndReleaseSonatypeStagingRepository && cd .."
+      "options": {
+        "command": "echo 'core-release' && cd core && sh ../gradlew publishToSonatype && cd .. && ./gradlew findSonatypeStagingRepository closeSonatypeStagingRepository && ./gradlew findSonatypeStagingRepository releaseSonatypeStagingRepository"
+      }
     },
     "snapshot-release": {
       "executor": "nx:run-commands",
-      "command": "echo 'core-snap' && cd core && sh ../gradlew publishToSonatype && cd .."
+      "options": {
+        "command": "echo 'core-snap' && cd core && sh ../gradlew publishToSonatype && cd .."
+      }
     }
   },
   "tags": []

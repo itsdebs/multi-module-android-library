@@ -41,13 +41,17 @@
         "notesFile": "./android/CHANGELOG_LATEST.md"
       }
     },
-    "release": {
+    "release-sonatype": {
       "executor": "nx:run-commands",
-      "command": "echo 'android-release' && cd android && sh ../gradlew publishToSonatype -Prelease closeAndReleaseSonatypeStagingRepository && cd .."
+      "options": {
+        "command": "echo 'android-release' && cd android && sh ../gradlew publishToSonatype && cd .. && ./gradlew findSonatypeStagingRepository closeSonatypeStagingRepository && ./gradlew findSonatypeStagingRepository releaseSonatypeStagingRepository"
+      }
     },
     "snapshot-release": {
       "executor": "nx:run-commands",
-      "command": "echo 'android-snap' && cd android && sh ../gradlew publishToSonatype && cd .."
+      "options": {
+        "command": "echo 'android-snap' && cd android && sh ../gradlew publishToSonatype && cd .."
+      }
     }
   },
   "tags": []
