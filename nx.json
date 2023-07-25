@@ -8,6 +8,6 @@
     }
   },
   "affected": {
-    "defaultBase": "origin/main"
+    "defaultBase": "main"
   }
 }
