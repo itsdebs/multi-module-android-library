@@ -44,13 +44,13 @@
     "release-sonatype": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "echo 'temp-release' && cd temp && sh ../gradlew publishToSonatype && cd .. && ./gradlew findSonatypeStagingRepository closeSonatypeStagingRepository && ./gradlew findSonatypeStagingRepository releaseSonatypeStagingRepository"
+        "command": "echo 'temp-release' && ./gradlew :temp:publishToSonatype -Prelease closeAndReleaseSonatypeStagingRepository"
       }
     },
     "snapshot-release": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "echo 'temp-snap' && cd temp && sh ../gradlew publishToSonatype && cd .."
+        "command": "echo 'temp-snap' && ./gradlew :temp:publishToSonatype"
       }
     }
   },
