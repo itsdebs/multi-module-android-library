@@ -46,6 +46,7 @@ jobs:
 
       - name: Publish snapshot to sonatype
         run: |
+          git fetch --no-tags --prune --depth=100 origin main
           npm run release-snapshot:sonatype
         env:
           SIGNING_KEY_ID: ${{ secrets.SIGNING_KEY_ID }}
