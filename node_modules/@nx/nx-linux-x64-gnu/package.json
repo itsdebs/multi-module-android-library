@@ -1,0 +1,30 @@
+{
+  "name": "@nx/nx-linux-x64-gnu",
+  "version": "16.5.3",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nrwl/nx.git",
+    "directory": "packages/nx/native-packages/linux-x64-gnu"
+  },
+  "os": [
+    "linux"
+  ],
+  "cpu": [
+    "x64"
+  ],
+  "main": "nx.linux-x64-gnu.node",
+  "files": [
+    "nx.linux-x64-gnu.node"
+  ],
+  "engines": {
+    "node": ">= 10"
+  },
+  "libc": [
+    "glibc"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "gitHead": "e886dc76e203b05908b1a1b8872dee834cc4d2c8"
+}
